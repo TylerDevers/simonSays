@@ -39,19 +39,19 @@ function redChange(element) {
 }
 
 document.getElementById("blue").addEventListener("click", function() {
-		console.log("blue Clicked");
+		simonSays.colorToTest.push('blue');
 });
 
 document.getElementById("red").addEventListener("click", function() {
-		console.log("red Clicked");
+		simonSays.colorToTest.push('red');
 });
 
 document.getElementById("yellow").addEventListener("click", function() {
-		console.log("yellow Clicked");
+		simonSays.colorToTest.push('yellow');
 });
 
 document.getElementById("green").addEventListener("click", function() {
-		console.log("green Clicked");
+		simonSays.colorToTest.push('green');
 });
 /*
  * ideas:
