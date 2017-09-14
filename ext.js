@@ -18,8 +18,13 @@ var lightBlue = "#98CCFF";
 var lightGreen = "#84FA84";
 
 var simonSays = {
-		color: function(color) {
-			console.log(color);
+		color: "function that sends new color",
+		colorToMatch: [], //"empty array to store colors as they are created"
+		colorToTest: [], //"empty array to store users picks",
+		colorPick: function() { //"chooses random color using arrays"
+			var nextColor = [yellow, red, blue, green][Math.floor(Math.random()*4)];
+			simonSays.colorToMatch.push(nextColor);
+			console.log(simonSays.colorToMatch);
 		}
 } 
  
@@ -33,4 +38,10 @@ function redChange(element) {
 
 /*
  * ideas:
- * 
+ * javascript event listener that will listen for clicks on the div tiles
+ * use array for computer sequence, then match to user array of answers.
+ * make computer sequence random
+ * declare method that detrmines next color in pattern using math.floor and random
+ * 		combine this with array of color variables to send generate the new color
+ * 		[red, blue, green][Math.floor(math.random() * 4)];
+ */
