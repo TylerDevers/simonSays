@@ -1,59 +1,57 @@
-/* psuedo code
- * colorChange {
- * 		onclick class changes;
- * 		class reverts to original setting;
- * }
- * 
- * use objects/methods to use dot notation
- * 
- */
  
 var yellow = "yellow";
-var red = "red";
-var blue = "blue";
-var green = "green";
-var lightYellow = "#FBFB98";
-var lightRed = "#FB9595";
-var lightBlue = "#98CCFF";
-var lightGreen = "#84FA84";
+var red = "red", blue = "blue", yellow = "yellow", green = "green";
+var lightYellow = "#FBFB98", lightRed = "#FB9595", lightBlue = "#98CCFF",
+		lightGreen = "#84FA84";
+var index = 0;
 
-var simonSays = {
-		color: "function that sends new color",
-		colorToMatch: [], //"empty array to store colors as they are created"
-		colorToTest: [], //"empty array to store users picks",
-		colorPick: function() { //"chooses random color using arrays"
-			var nextColor = [yellow, red, blue, green][Math.floor(Math.random()*4)];
-			simonSays.colorToMatch.push(nextColor);
-			console.log(simonSays.colorToMatch);
-		}
+var game = {
+	gamePlay: function() {
+		//starts new  game
+			if (game.colorSeq == 0) {
+					game.round();
+			} else {
+					if (game.colorSeq[index] == game.seqTest[index]) {
+						console.log("correct ");
+						
+					}
+			}
+	},
+	colorSeq: [], // store  game colors
+	seqTest: [], // store users picks
+	round: function() { // chooses random color
+		var newColor = [yellow, red, blue, green][Math.floor(Math.random()*4)];
+		index ++;
+		game.colorSeq.push(newColor);
+		console.log(game.colorSeq);
+	}
 } 
 
+//game logic
 
 
-function redChange(element) {
-	var color = simonSays.color(element.id);
-	console.log("clicked " + color + tile);
-	element.style.background = lightRed;
-	
-	//element.setAttribute("background", "#FF6161");
-}
-
+// event listeners
 document.getElementById("blue").addEventListener("click", function() {
-		simonSays.colorToTest.push('blue');
+		game.seqTest.push('blue');
+		game.gamePlay();
 });
 
 document.getElementById("red").addEventListener("click", function() {
-		simonSays.colorToTest.push('red');
+		game.seqTest.push('red');
+		game.gamePlay();
 });
 
 document.getElementById("yellow").addEventListener("click", function() {
-		simonSays.colorToTest.push('yellow');
+		game.seqTest.push('yellow');
+		game.gamePlay();
 });
 
 document.getElementById("green").addEventListener("click", function() {
-		simonSays.colorToTest.push('green');
+		game.seqTest.push('green');
+		game.gamePlay();
 });
 /*
+ * working on gameplay. gamelogic is iffy.
  * ideas:
  * javascript event listener that will listen for clicks on the div tiles
  * use array for computer sequence, then match to user array of answers.
