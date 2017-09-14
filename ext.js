@@ -27,7 +27,9 @@ var simonSays = {
 			console.log(simonSays.colorToMatch);
 		}
 } 
- 
+
+
+
 function redChange(element) {
 	var color = simonSays.color(element.id);
 	console.log("clicked " + color + tile);
@@ -36,6 +38,21 @@ function redChange(element) {
 	//element.setAttribute("background", "#FF6161");
 }
 
+document.getElementById("blue").addEventListener("click", function() {
+		console.log("blue Clicked");
+});
+
+document.getElementById("red").addEventListener("click", function() {
+		console.log("red Clicked");
+});
+
+document.getElementById("yellow").addEventListener("click", function() {
+		console.log("yellow Clicked");
+});
+
+document.getElementById("green").addEventListener("click", function() {
+		console.log("green Clicked");
+});
 /*
  * ideas:
  * javascript event listener that will listen for clicks on the div tiles
