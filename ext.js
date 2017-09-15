@@ -8,11 +8,14 @@ function nextColor() {
 	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
 	sequence.push(newColor);
+	console.log("sequence is " + sequence);
 }
 
 function userColor(color) {
 	//send clicked color to testSequence[]
 	testSequence.push(color);
+	index ++;
+	console.log("my sequence " + testSequence);
 }
 
 function checkSequence() {
@@ -23,6 +26,7 @@ function checkSequence() {
 				console.log("it does not match!!");
 		}
 }
+
 // event listeners
 document.getElementById("blue").addEventListener("click", function() {
 	userColor('blue');
