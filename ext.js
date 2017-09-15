@@ -3,24 +3,26 @@ var red = "red", blue = "blue", yellow = "yellow", green = "green",
 		lightGreen = "#84FA84";
 var colors = [red, blue, yellow, green], sequence = [], testSequence = [];
 var index = 0;
-/*
- * the Broad strokes:
- * game sequences will be stored in arrays
- */
+
 function nextColor() {
+	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
 	sequence.push(newColor);
-	//console.log(sequence);
 }
 
 function userColor(color) {
 	//send clicked color to testSequence[]
 	testSequence.push(color);
-	console.log(testSequence);
-	
 }
 
-
+function checkSequence() {
+		//will check if arrays match using index value.
+		if (sequence[index] == testSequence[index]) {
+				console.log("it matches");
+		} else {
+				console.log("it does not match!!");
+		}
+}
 // event listeners
 document.getElementById("blue").addEventListener("click", function() {
 	userColor('blue');
