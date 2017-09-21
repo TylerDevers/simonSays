@@ -1,9 +1,20 @@
 var red = "red", blue = "blue", yellow = "yellow", green = "green", 
 		lightYellow = "#FBFB98", lightRed = "#FB9595", lightBlue = "#98CCFF",
 		lightGreen = "#84FA84";
-var colors = [red, blue, yellow, green], sequence = [], testSequence = [];
+var colors = [red, blue, yellow, green], sequence = [], mySeq = [];
 var index = 0;
 
+/*
+ * TODO:
+ * create start button to begin game.
+ * when game started:
+ * 		nextColor() called automatically
+ * 		while mhySeq.length < sequence.length, allow userColor to run.
+ * 		when mySeq.length == sequence.length, run checkSequence
+ * 		if mySeq is correct, reset mySeq and run nextColor again
+ * 		if mySeq not correct, reset mySeq and sequence, and return message.
+ */
+ 
 function nextColor() {
 	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
@@ -12,15 +23,15 @@ function nextColor() {
 }
 
 function userColor(color) {
-	//send clicked color to testSequence[]
-	testSequence.push(color);
+	//send clicked color to mySeq[]
+	mySeq.push(color);
 	index ++;
-	console.log("my sequence " + testSequence);
+	console.log("my sequence " + mySeq);
 }
 
 function checkSequence() {
 		//will check if arrays match using index value.
-		if (sequence[index] == testSequence[index]) {
+		if (mySeq[index] == sequence[index]) {
 				console.log("it matches");
 		} else {
 				console.log("it does not match!!");
