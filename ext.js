@@ -9,7 +9,7 @@ var index = 0;
  * create start button to begin game.
  * when game started:
  * 		nextColor() called automatically
- * 		while mhySeq.length < sequence.length, allow userColor to run.
+ * 		while mySeq.length < sequence.length, allow userColor to run.
  * 		when mySeq.length == sequence.length, run checkSequence
  * 		if mySeq is correct, reset mySeq and run nextColor again
  * 		if mySeq not correct, reset mySeq and sequence, and return message.
@@ -19,23 +19,46 @@ function nextColor() {
 	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
 	sequence.push(newColor);
+	for (color in sequence) {
+			console.log(sequence[color]);
+	}
 	console.log("sequence is " + sequence);
 }
 
 function userColor(color) {
 	//send clicked color to mySeq[]
-	mySeq.push(color);
-	index ++;
-	console.log("my sequence " + mySeq);
+	if (mySeq.length < sequence.length) {
+			mySeq.push(color);
+			console.log(color);
+			if (mySeq.length == sequence.length) {
+				console.log("my sequence " + mySeq);
+				checkSequence();
+			}
+	} else if (mySeq.length >= sequence.length) {
+			console.log("need to run nextColor()");
+	}
+	//mySeq.push(color);
+	//index ++;
+	
 }
 
 function checkSequence() {
 		//will check if arrays match using index value.
-		if (mySeq[index] == sequence[index]) {
-				console.log("it matches");
-		} else {
-				console.log("it does not match!!");
-		}
+		var lastColorIndex = sequence.length - 1;
+		
+		for (color in sequence) {
+			if (sequence[color] == mySeq[color] && color < lastColorIndex) {
+				console.log('match, color of ' + sequence[color]);
+			} else if (sequence[color] == mySeq[color] && color == lastColorIndex) {
+					console.log("sequence's are a match!");
+			} else if (sequence[color] != mySeq[color]) {
+						console.log("it does not match!");
+						break;
+			} 
+		} 
+		
+		//reset my sequence array
+		
 }
 
 // event listeners
