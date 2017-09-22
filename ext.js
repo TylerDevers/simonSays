@@ -33,12 +33,23 @@ function darkenColor() {
 }
 
 function activateLight(color) {
+	//helper function for nextColor and userColor
 	switch (color) {
 			case "red":
-				document.getElementById("red").style.background = "pink";
-				
-				//changeColor(color);
+				changeColor(color);
 				console.log("triggered pink");
+				break;
+			case "blue":
+				changeColor(color);
+				console.log("triggered blue");
+				break;
+			case "yellow":
+				changeColor(color);
+				console.log("triggered yellow");
+				break;
+			case "green":
+				changeColor(color);
+				console.log("triggered green");
 				break;
 	}
 }
