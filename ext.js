@@ -10,54 +10,14 @@ var light = {
 
 /*
  * TODO:
- * create start button to begin game.
- * when game started:
- * 		nextColor() called automatically
- * 		while mySeq.length < sequence.length, allow userColor to run.
- * 		when mySeq.length == sequence.length, run checkSequence
- * 		if mySeq is correct, reset mySeq and run nextColor again
- * 		if mySeq not correct, reset mySeq and sequence, and return message.
+ * activateLights() when nextColor is pushed
  */
-function changeColor(color) {
-	//helper function for activateLight
-	oldColor = color;
-	document.getElementById(color).style.background = light[color];
-	setTimeout(darkenColor, 500);
-	console.log(oldColor);
-}
-
-function darkenColor() {
-	//helper function for changeColor
-	document.getElementById(oldColor).style.background = oldColor;
-	console.log("darken " + oldColor);
-}
-
-function activateLight(color) {
-	//helper function for nextColor and userColor
-	switch (color) {
-			case "red":
-				changeColor(color);
-				console.log("triggered pink");
-				break;
-			case "blue":
-				changeColor(color);
-				console.log("triggered blue");
-				break;
-			case "yellow":
-				changeColor(color);
-				console.log("triggered yellow");
-				break;
-			case "green":
-				changeColor(color);
-				console.log("triggered green");
-				break;
-	}
-}
 
 function nextColor() {
 	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
 	sequence.push(newColor);
+	activateLight(newColor);
 	for (color in sequence) {
 			console.log(sequence[color]);
 	}
@@ -71,6 +31,7 @@ function userColor(color) {
 			nextColor();
 	} else if (mySeq.length < sequence.length) {
 			mySeq.push(color);
+			activateLight(color);
 			console.log(color);
 			if (mySeq.length == sequence.length) {
 				console.log("my sequence " + mySeq);
@@ -96,6 +57,42 @@ function checkSequence() {
 						break;
 			} 
 		} 		
+}
+
+function changeColor(color) {
+	//helper function for activateLight
+	oldColor = color;
+	document.getElementById(color).style.background = light[color];
+	setTimeout(darkenColor, 500);
+	//console.log(oldColor);
+}
+
+function darkenColor() {
+	//helper function for changeColor
+	document.getElementById(oldColor).style.background = oldColor;
+	//console.log("darken " + oldColor);
+}
+
+function activateLight(color) {
+	//helper function for nextColor and userColor
+	switch (color) {
+			case "red":
+				changeColor(color);
+				console.log("triggered pink");
+				break;
+			case "blue":
+				changeColor(color);
+				console.log("triggered blue");
+				break;
+			case "yellow":
+				changeColor(color);
+				console.log("triggered yellow");
+				break;
+			case "green":
+				changeColor(color);
+				console.log("triggered green");
+				break;
+	}
 }
 
 // event listeners
