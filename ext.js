@@ -27,7 +27,10 @@ function nextColor() {
 
 function userColor(color) {
 	//send clicked color to mySeq[]
-	if (mySeq.length < sequence.length) {
+	//if sequence is empty, begin game
+	if (sequence.length<1) {
+			nextColor();
+	} else if (mySeq.length < sequence.length) {
 			mySeq.push(color);
 			console.log(color);
 			if (mySeq.length == sequence.length) {
@@ -44,15 +47,17 @@ function userColor(color) {
 
 function checkSequence() {
 		//will check if arrays match using index value.
-		var lastColorIndex = sequence.length - 1;
+		var lastColor = sequence.length - 1;
 		
 		for (color in sequence) {
-			if (sequence[color] == mySeq[color] && color < lastColorIndex) {
-				console.log('match, color of ' + sequence[color]);
-			} else if (sequence[color] == mySeq[color] && color == lastColorIndex) {
+			if (sequence[color] == mySeq[color] && color == lastColor) {
 					console.log("sequence's are a match!");
+					mySeq = [];
+					nextColor();
 			} else if (sequence[color] != mySeq[color]) {
 						console.log("it does not match!");
+						mySeq = [];
+						sequence = [];
 						break;
 			} 
 		} 
