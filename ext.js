@@ -1,8 +1,12 @@
 var red = "red", blue = "blue", yellow = "yellow", green = "green", 
-		lightYellow = "#FBFB98", lightRed = "#FB9595", lightBlue = "#98CCFF",
-		lightGreen = "#84FA84";
+		lightyellow = "#FBFB98", lightRed = "#FB9595", lightblue = "#98CCFF",
+		lightgreen = "#84FA84";
 var colors = [red, blue, yellow, green], sequence = [], mySeq = [];
 var index = 0;
+var oldColor;
+var light = {
+		red: "pink", blue: "lightBlue", yellow: "lightYellow", green: "lightGreen"
+		};
 
 /*
  * TODO:
@@ -14,7 +18,31 @@ var index = 0;
  * 		if mySeq is correct, reset mySeq and run nextColor again
  * 		if mySeq not correct, reset mySeq and sequence, and return message.
  */
- 
+function changeColor(color) {
+	//helper function for activateLight
+	oldColor = color;
+	document.getElementById(color).style.background = light[color];
+	setTimeout(darkenColor, 500);
+	console.log(oldColor);
+}
+
+function darkenColor() {
+	//helper function for changeColor
+	document.getElementById(oldColor).style.background = oldColor;
+	console.log("darken " + oldColor);
+}
+
+function activateLight(color) {
+	switch (color) {
+			case "red":
+				document.getElementById("red").style.background = "pink";
+				
+				//changeColor(color);
+				console.log("triggered pink");
+				break;
+	}
+}
+
 function nextColor() {
 	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
@@ -40,13 +68,9 @@ function userColor(color) {
 	} else if (mySeq.length >= sequence.length) {
 			console.log("need to run nextColor()");
 	}
-	//mySeq.push(color);
-	//index ++;
-	
 }
 
 function checkSequence() {
-		//will check if arrays match using index value.
 		var lastColor = sequence.length - 1;
 		
 		for (color in sequence) {
@@ -60,10 +84,7 @@ function checkSequence() {
 						sequence = [];
 						break;
 			} 
-		} 
-		
-		//reset my sequence array
-		
+		} 		
 }
 
 // event listeners
