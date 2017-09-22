@@ -11,17 +11,22 @@ var light = {
 /*
  * TODO:
  * activateLights() when nextColor is pushed
+ * lights are buggy, fix light timing issue
+ * timeout is messing with user experience, to slow to respondv
  */
 
 function nextColor() {
 	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
 	sequence.push(newColor);
-	activateLight(newColor);
+	//activateLight(newColor);
 	for (color in sequence) {
 			console.log(sequence[color]);
 	}
 	console.log("sequence is " + sequence);
+	for (color in sequence) {
+		activateLight(sequence[color]);
+	}
 }
 
 function userColor(color) {
@@ -32,10 +37,10 @@ function userColor(color) {
 	} else if (mySeq.length < sequence.length) {
 			mySeq.push(color);
 			activateLight(color);
-			console.log(color);
+			//console.log(color);
 			if (mySeq.length == sequence.length) {
 				console.log("my sequence " + mySeq);
-				checkSequence();
+				setTimeout(checkSequence, 500);
 			}
 	} else if (mySeq.length >= sequence.length) {
 			console.log("need to run nextColor()");
@@ -77,20 +82,29 @@ function activateLight(color) {
 	//helper function for nextColor and userColor
 	switch (color) {
 			case "red":
-				changeColor(color);
-				console.log("triggered pink");
+				setTimeout(function(){
+						changeColor(color);
+				}, 500);
+				
+				//console.log("triggered pink");
 				break;
 			case "blue":
-				changeColor(color);
-				console.log("triggered blue");
+				setTimeout(function(){
+						changeColor(color);
+				}, 500);
+				//console.log("triggered blue");
 				break;
 			case "yellow":
-				changeColor(color);
-				console.log("triggered yellow");
+				setTimeout(function(){
+						changeColor(color);
+				}, 500);
+				//console.log("triggered yellow");
 				break;
 			case "green":
-				changeColor(color);
-				console.log("triggered green");
+				setTimeout(function(){
+						changeColor(color);
+				}, 500);
+				//console.log("triggered green");
 				break;
 	}
 }
