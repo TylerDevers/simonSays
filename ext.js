@@ -10,9 +10,9 @@ var light = {
 
 /*
  * TODO:
- * sequence is being erased after first iteration.... :( seqlights killing it
- * set interval or set timeout?
- * timeout is messing with user experience, to slow to respondv
+ * 
+ * 
+ *  
  */
 
 function nextColor() {
@@ -24,45 +24,57 @@ function nextColor() {
 }
 
 function seqLights() {
-	for (i in sequence) {
-		setTimeout(function(){
-			activateLight(i);
-		}, 500);
+	console.log("seqLights");
+	var timer = 0;
+	for (var colors in sequence) {
+		timer = parseInt(colors)+1;
+			activateLight(sequence[colors], timer);
+			console.log(timer);
 	}
 }
 
-function activateLight(color) {
+function activateLight(color, time) {
 	//helper function for nextColor and userColor
-	setTimeout(function() {
+	//time is set is seqLights()
 		switch (color) {
 				case "red":
-					changeColor(color);				
+					setTimeout(function(){
+						changeColor(color);		
+					},500 * time);		
 					//console.log("triggered pink");
 					break;
 				case "blue":
-					changeColor(color);
+					setTimeout(function(){
+						changeColor(color);		
+					},500 * time);
 					//console.log("triggered blue");
 					break;
 				case "yellow":
-					changeColor(color);
+					setTimeout(function(){
+						changeColor(color);		
+					},500 * time);
 					//console.log("triggered yellow");
 					break;
 				case "green":
-					changeColor(color);
+					setTimeout(function(){
+						changeColor(color);		
+					},500 * time);
 					//console.log("triggered green");
 					break;
 		}
-	}, 500);
+	
 }
 
-function changeColor(color) {
+function changeColor(originalColor) {
 	//helper function for activateLight
-	document.getElementById(color).style.background = light[color];
+	//setTimeout(function(){
+		document.getElementById(originalColor).style.background = light[originalColor];
+	//},500);
 	setTimeout(function(){
-			document.getElementById(color).style.background = color;
+			document.getElementById(originalColor).style.background = originalColor;
 	},500);
 	
-	//console.log(oldColor);
+	//console.log("changeColor");
 }
 
 function userColor(color) {
