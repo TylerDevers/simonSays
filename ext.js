@@ -10,7 +10,7 @@ var light = {
 
 /*
  * TODO:
- * repeating colors only flash once
+ * 
  * add messaging element to tell user if they have lost
  *  
  */
@@ -29,6 +29,7 @@ function seqLights() {
 	for (var colors in sequence) {
 		timer = parseInt(colors)+1;
 			activateLight(sequence[colors], timer);
+			console.log("seqLights " + sequence[colors]);
 	}
 }
 
@@ -68,10 +69,11 @@ function changeColor(originalColor) {
 	//helper function for activateLight
 	//setTimeout(function(){
 		document.getElementById(originalColor).style.background = light[originalColor];
-	//},500);
-	setTimeout(function(){
+		setTimeout(function(){
 			document.getElementById(originalColor).style.background = originalColor;
-	},500);
+		},250);
+	//},500);
+	
 	
 	//console.log("changeColor");
 }
