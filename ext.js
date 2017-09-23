@@ -11,7 +11,7 @@ var light = {
 /*
  * TODO:
  * repeating colors only flash once
- * increase time before nextColor is triggered after user click.
+ * add messaging element to tell user if they have lost
  *  
  */
 
@@ -101,7 +101,7 @@ function checkSequence() {
 			if (sequence[color] == mySeq[color] && color == lastColor) {
 					console.log("sequence's are a match!");
 					mySeq = [];
-					nextColor();
+					setTimeout(nextColor, 1000);
 			} else if (sequence[color] != mySeq[color]) {
 					console.log("it does not match!");
 					mySeq = [];
