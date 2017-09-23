@@ -10,8 +10,8 @@ var light = {
 
 /*
  * TODO:
- * activateLights() when nextColor is pushed
- * lights are buggy, fix light timing issue
+ * sequence is being erased after first iteration.... :( seqlights killing it
+ * set interval or set timeout?
  * timeout is messing with user experience, to slow to respondv
  */
 
@@ -19,21 +19,57 @@ function nextColor() {
 	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
 	sequence.push(newColor);
-	//activateLight(newColor);
-	for (color in sequence) {
-			console.log(sequence[color]);
-	}
 	console.log("sequence is " + sequence);
-	for (color in sequence) {
-		activateLight(sequence[color]);
+	seqLights();
+}
+
+function seqLights() {
+	for (i in sequence) {
+		setTimeout(function(){
+			activateLight(i);
+		}, 500);
 	}
 }
 
+function activateLight(color) {
+	//helper function for nextColor and userColor
+	setTimeout(function() {
+		switch (color) {
+				case "red":
+					changeColor(color);				
+					//console.log("triggered pink");
+					break;
+				case "blue":
+					changeColor(color);
+					//console.log("triggered blue");
+					break;
+				case "yellow":
+					changeColor(color);
+					//console.log("triggered yellow");
+					break;
+				case "green":
+					changeColor(color);
+					//console.log("triggered green");
+					break;
+		}
+	}, 500);
+}
+
+function changeColor(color) {
+	//helper function for activateLight
+	document.getElementById(color).style.background = light[color];
+	setTimeout(function(){
+			document.getElementById(color).style.background = color;
+	},500);
+	
+	//console.log(oldColor);
+}
+
 function userColor(color) {
-	//send clicked color to mySeq[]
 	//if sequence is empty, begin game
 	if (sequence.length<1) {
 			nextColor();
+	//continues game
 	} else if (mySeq.length < sequence.length) {
 			mySeq.push(color);
 			activateLight(color);
@@ -56,58 +92,14 @@ function checkSequence() {
 					mySeq = [];
 					nextColor();
 			} else if (sequence[color] != mySeq[color]) {
-						console.log("it does not match!");
-						mySeq = [];
-						sequence = [];
-						break;
+					console.log("it does not match!");
+					mySeq = [];
+					sequence = [];
+					break;
 			} 
 		} 		
 }
 
-function changeColor(color) {
-	//helper function for activateLight
-	oldColor = color;
-	document.getElementById(color).style.background = light[color];
-	setTimeout(darkenColor, 500);
-	//console.log(oldColor);
-}
-
-function darkenColor() {
-	//helper function for changeColor
-	document.getElementById(oldColor).style.background = oldColor;
-	//console.log("darken " + oldColor);
-}
-
-function activateLight(color) {
-	//helper function for nextColor and userColor
-	switch (color) {
-			case "red":
-				setTimeout(function(){
-						changeColor(color);
-				}, 500);
-				
-				//console.log("triggered pink");
-				break;
-			case "blue":
-				setTimeout(function(){
-						changeColor(color);
-				}, 500);
-				//console.log("triggered blue");
-				break;
-			case "yellow":
-				setTimeout(function(){
-						changeColor(color);
-				}, 500);
-				//console.log("triggered yellow");
-				break;
-			case "green":
-				setTimeout(function(){
-						changeColor(color);
-				}, 500);
-				//console.log("triggered green");
-				break;
-	}
-}
 
 // event listeners
 document.getElementById("blue").addEventListener("click", function() {
