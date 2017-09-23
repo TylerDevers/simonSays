@@ -10,8 +10,8 @@ var light = {
 
 /*
  * TODO:
- * 
- * 
+ * repeating colors only flash once
+ * increase time before nextColor is triggered after user click.
  *  
  */
 
@@ -24,18 +24,17 @@ function nextColor() {
 }
 
 function seqLights() {
-	console.log("seqLights");
+	//console.log("seqLights");
 	var timer = 0;
 	for (var colors in sequence) {
 		timer = parseInt(colors)+1;
 			activateLight(sequence[colors], timer);
-			console.log(timer);
 	}
 }
 
 function activateLight(color, time) {
 	//helper function for nextColor and userColor
-	//time is set is seqLights()
+	//time is set is seqLights(), sets pause between flashes
 		switch (color) {
 				case "red":
 					setTimeout(function(){
