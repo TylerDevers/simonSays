@@ -12,8 +12,7 @@ var light = {
  * TODO:
  * add sounds
  * add reset button
- * add strict mode
- * add win condition of 20 
+ * add strict mode 
  */
 
 function nextColor() {
@@ -103,13 +102,22 @@ function checkSequence() {
 		var lastColor = sequence.length - 1;
 		
 		for (color in sequence) {
+
 			if (sequence[color] == mySeq[color] && color == lastColor) {
 					console.log("sequence's are a match!");
 					mySeq = [];
 					counter++;
 					document.getElementById("counter").innerHTML = counter;
 					console.log(counter);
-					setTimeout(nextColor, 1000);
+					if (counter >= 20) {
+						document.getElementById("msg-screen").innerHTML = "Congratulations! You Beat Me! Click a color to play again.";
+						mySeq = [];
+						sequence = [];
+						counter = 0;
+						break;
+					}else {
+						setTimeout(nextColor, 1000);
+					}
 			} else if (sequence[color] != mySeq[color]) {
 					document.getElementById("msg-screen").innerHTML = "Oh no! Your sequence did not match! Click a color to play again.";
 					console.log("it does not match!");
