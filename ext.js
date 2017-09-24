@@ -10,9 +10,10 @@ var light = {
 
 /*
  * TODO:
- * 
- * add messaging element to tell user if they have lost
- * add number screen to show score
+ * add sounds
+ * add reset button
+ * add strict mode
+ * add win condition of 20 
  */
 
 function nextColor() {
