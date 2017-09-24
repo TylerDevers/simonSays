@@ -11,10 +11,14 @@ var sound1 = new Audio('simonSound1.mp3'), sound2 = new Audio('simonSound2.mp3')
 		sound3 = new Audio('simonSound3.mp3'), sound4 = new Audio('simonSound4.mp3');
 /*
  * TODO:
- * add reset button
  * add strict mode 
  */
-
+function reset() {
+	document.getElementById("msg-screen").innerHTML = "Game Reset, Click a color to start.";
+	mySeq = [];
+	sequence = [];
+	counter = 0;
+}
 function nextColor() {
 	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
