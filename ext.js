@@ -7,10 +7,10 @@ var oldColor;
 var light = {
 		red: "pink", blue: "lightBlue", yellow: "lightYellow", green: "lightGreen"
 		};
-
+var sound1 = new Audio('simonSound1.mp3'), sound2 = new Audio('simonSound2.mp3'),
+		sound3 = new Audio('simonSound3.mp3'), sound4 = new Audio('simonSound4.mp3');
 /*
  * TODO:
- * add sounds
  * add reset button
  * add strict mode 
  */
@@ -39,26 +39,30 @@ function activateLight(color, time) {
 		switch (color) {
 				case "red":
 					setTimeout(function(){
+						sound1.play();
 						changeColor(color);		
-					},500 * time);		
+					},700 * time);		
 					//console.log("triggered pink");
 					break;
 				case "blue":
 					setTimeout(function(){
-						changeColor(color);		
-					},500 * time);
+						sound2.play();	
+						changeColor(color);	
+					},700 * time);
 					//console.log("triggered blue");
 					break;
 				case "yellow":
 					setTimeout(function(){
-						changeColor(color);		
-					},500 * time);
+						sound3.play();		
+						changeColor(color);
+					},700 * time);
 					//console.log("triggered yellow");
 					break;
 				case "green":
 					setTimeout(function(){
+						sound4.play();
 						changeColor(color);		
-					},500 * time);
+					},700 * time);
 					//console.log("triggered green");
 					break;
 		}
