@@ -1,8 +1,8 @@
 var red = "red", blue = "blue", yellow = "yellow", green = "green", 
-		lightyellow = "#FBFB98", lightRed = "#FB9595", lightblue = "#98CCFF",
+		lightyellow = "#FBFB98", lightred = "#FB9595", lightblue = "#98CCFF",
 		lightgreen = "#84FA84";
 var colors = [red, blue, yellow, green], sequence = [], mySeq = [];
-var index = 0;
+var index = 0, counter = 0;
 var oldColor;
 var light = {
 		red: "pink", blue: "lightBlue", yellow: "lightYellow", green: "lightGreen"
@@ -12,7 +12,7 @@ var light = {
  * TODO:
  * 
  * add messaging element to tell user if they have lost
- *  
+ * add number screen to show score
  */
 
 function nextColor() {
@@ -81,6 +81,8 @@ function changeColor(originalColor) {
 function userColor(color) {
 	//if sequence is empty, begin game
 	if (sequence.length<1) {
+			document.getElementById("msg-screen").innerHTML = "";
+			document.getElementById("counter").innerHTML = counter;
 			nextColor();
 	//continues game
 	} else if (mySeq.length < sequence.length) {
@@ -103,11 +105,16 @@ function checkSequence() {
 			if (sequence[color] == mySeq[color] && color == lastColor) {
 					console.log("sequence's are a match!");
 					mySeq = [];
+					counter++;
+					document.getElementById("counter").innerHTML = counter;
+					console.log(counter);
 					setTimeout(nextColor, 1000);
 			} else if (sequence[color] != mySeq[color]) {
+					document.getElementById("msg-screen").innerHTML = "Oh no! Your sequence did not match! Click a color to play again.";
 					console.log("it does not match!");
 					mySeq = [];
 					sequence = [];
+					counter = 0;
 					break;
 			} 
 		} 		
