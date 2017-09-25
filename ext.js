@@ -2,23 +2,24 @@ var red = "red", blue = "blue", yellow = "yellow", green = "green",
 		lightyellow = "#FBFB98", lightred = "#FB9595", lightblue = "#98CCFF",
 		lightgreen = "#84FA84";
 var colors = [red, blue, yellow, green], sequence = [], mySeq = [];
-var index = 0, counter = 0;
+var index = 0, counter = 0, chances = 1;
 var oldColor;
 var light = {
 		red: "pink", blue: "lightBlue", yellow: "lightYellow", green: "lightGreen"
 		};
 var sound1 = new Audio('simonSound1.mp3'), sound2 = new Audio('simonSound2.mp3'),
 		sound3 = new Audio('simonSound3.mp3'), sound4 = new Audio('simonSound4.mp3');
+var messageCenter = document.getElementById("msg-screen");
 /*
  * TODO:
- * add strict mode 
  * add second chance when not in strict mode, allow repeat of colors
  */
 function reset() {
-	document.getElementById("msg-screen").innerHTML = "Game Reset, Click a color to start.";
+	messageCenter.innerHTML = "Click a color to start a new game.";
 	mySeq = [];
 	sequence = [];
 	counter = 0;
+	chances = 1;
 }
 function nextColor() {
 	//adds new colors to game sequence
@@ -31,6 +32,7 @@ function nextColor() {
 function seqLights() {
 	//console.log("seqLights");
 	var timer = 0;
+	messageCenter.innerHTML = "";
 	for (var colors in sequence) {
 		timer = parseInt(colors)+1;
 			activateLight(sequence[colors], timer);
@@ -88,10 +90,11 @@ function changeColor(originalColor) {
 }
 
 function userColor(color) {
-	//if sequence is empty, begin game
+	//if sequence is empty, begin game, reset chances
 	if (sequence.length<1) {
-			document.getElementById("msg-screen").innerHTML = "";
+			messageCenter.innerHTML = "";
 			document.getElementById("counter").innerHTML = counter;
+			chances = 1;
 			nextColor();
 	//continues game
 	} else if (mySeq.length < sequence.length) {
@@ -108,10 +111,9 @@ function userColor(color) {
 }
 
 function checkSequence() {
+	console.log("chances left " + chances)
 		var lastColor = sequence.length - 1;
-		
 		for (color in sequence) {
-
 			if (sequence[color] == mySeq[color] && color == lastColor) {
 					console.log("sequence's are a match!");
 					mySeq = [];
@@ -119,7 +121,7 @@ function checkSequence() {
 					document.getElementById("counter").innerHTML = counter;
 					console.log(counter);
 					if (counter >= 20) {
-						document.getElementById("msg-screen").innerHTML = "Congratulations! You Beat Me! Click a color to play again.";
+						messageCenter.innerHTML = "Congratulations! You Beat Me! Click a color to play again.";
 						mySeq = [];
 						sequence = [];
 						counter = 0;
@@ -127,8 +129,14 @@ function checkSequence() {
 					}else {
 						setTimeout(nextColor, 1000);
 					}
+			} else if (sequence[color] != mySeq[color] && chances == 1) {
+					mySeq = [];
+					chances = 0;
+					messageCenter.innerHTML = "You missed one! Lets try one more time. Here comes the needed sequence.";
+					setTimeout(seqLights, 5000);				
+					break;
 			} else if (sequence[color] != mySeq[color]) {
-					document.getElementById("msg-screen").innerHTML = "Oh no! Your sequence did not match! Click a color to play again.";
+					messageCenter.innerHTML = "Oh no! Your sequence did not match! Click a color to play again.";
 					console.log("it does not match!");
 					mySeq = [];
 					sequence = [];
@@ -136,6 +144,12 @@ function checkSequence() {
 					break;
 			} 
 		} 		
+}
+
+function strict() {
+		var strict = document.getElementById("strict");
+		var strictOption = strict.options[strict.selectedIndex].value;
+		console.log(strictOption);
 }
 
 
