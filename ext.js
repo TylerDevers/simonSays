@@ -12,6 +12,7 @@ var sound1 = new Audio('simonSound1.mp3'), sound2 = new Audio('simonSound2.mp3')
 /*
  * TODO:
  * add strict mode 
+ * add second chance when not in strict mode, allow repeat of colors
  */
 function reset() {
 	document.getElementById("msg-screen").innerHTML = "Game Reset, Click a color to start.";
