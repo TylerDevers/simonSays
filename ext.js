@@ -19,7 +19,7 @@ function nextColor() {
 	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
 	sequence.push(newColor);
-	console.log("sequence is " + sequence);
+	//console.log("sequence is " + sequence);
 	seqLights();
 }
 
@@ -30,7 +30,7 @@ function seqLights() {
 	for (var colors in sequence) {
 		timer = parseInt(colors)+1;
 			activateLight(sequence[colors], timer);
-			console.log("seqLights " + sequence[colors]);
+			//console.log("seqLights " + sequence[colors]);
 	}
 }
 
@@ -96,25 +96,25 @@ function userColor(color) {
 			activateLight(color);
 			//console.log(color);
 			if (mySeq.length == sequence.length) {
-				console.log("my sequence " + mySeq);
+				//console.log("my sequence " + mySeq);
 				setTimeout(checkSequence, 500);
 			}
 	} else if (mySeq.length >= sequence.length) {
-			console.log("need to run nextColor()");
+			messageCenter.innerHTML = "Too many presses!!. Start again.";
 	}
 }
 
 function checkSequence() {
 	var lastColor = sequence.length - 1;
 	strictCheck();
-	console.log("chances left " + chances)
+	//console.log("chances left " + chances)
 	for (color in sequence) {
 		if (sequence[color] == mySeq[color] && color == lastColor) {
-				console.log("sequence's are a match!");
+				//console.log("sequence's are a match!");
 				mySeq = [];
 				counter++;
 				document.getElementById("counter").innerHTML = counter;
-				console.log(counter);
+				//console.log(counter);
 				if (counter >= 20) {
 					messageCenter.innerHTML = "Congratulations! You Beat Me! Click a color to play again.";
 					mySeq = [];
@@ -132,7 +132,7 @@ function checkSequence() {
 				break;
 		} else if (sequence[color] != mySeq[color]) {
 				messageCenter.innerHTML = "Oh no! Your sequence did not match! Click a color to play again.";
-				console.log("it does not match!");
+				//console.log("it does not match!");
 				mySeq = [];
 				sequence = [];
 				counter = 0;
@@ -147,7 +147,7 @@ function strictCheck() {
 		if (strictOption == "on") {
 				chances = 0;
 		}
-		console.log("check for strict");
+		//console.log("check for strict");
 }
 
 function reset() {
