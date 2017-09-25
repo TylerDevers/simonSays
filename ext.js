@@ -3,7 +3,7 @@ var red = "red", blue = "blue", yellow = "yellow", green = "green",
 		lightgreen = "#84FA84";
 var colors = [red, blue, yellow, green], sequence = [], mySeq = [];
 var index = 0, counter = 0, chances = 1;
-var oldColor;
+var oldColor, strict, strictOption;
 var light = {
 		red: "pink", blue: "lightBlue", yellow: "lightYellow", green: "lightGreen"
 		};
@@ -12,15 +12,9 @@ var sound1 = new Audio('simonSound1.mp3'), sound2 = new Audio('simonSound2.mp3')
 var messageCenter = document.getElementById("msg-screen");
 /*
  * TODO:
- * add second chance when not in strict mode, allow repeat of colors
+ * 
  */
-function reset() {
-	messageCenter.innerHTML = "Click a color to start a new game.";
-	mySeq = [];
-	sequence = [];
-	counter = 0;
-	chances = 1;
-}
+
 function nextColor() {
 	//adds new colors to game sequence
 	var newColor = colors[Math.floor(Math.random()*4)];
@@ -111,47 +105,58 @@ function userColor(color) {
 }
 
 function checkSequence() {
+	var lastColor = sequence.length - 1;
+	strictCheck();
 	console.log("chances left " + chances)
-		var lastColor = sequence.length - 1;
-		for (color in sequence) {
-			if (sequence[color] == mySeq[color] && color == lastColor) {
-					console.log("sequence's are a match!");
-					mySeq = [];
-					counter++;
-					document.getElementById("counter").innerHTML = counter;
-					console.log(counter);
-					if (counter >= 20) {
-						messageCenter.innerHTML = "Congratulations! You Beat Me! Click a color to play again.";
-						mySeq = [];
-						sequence = [];
-						counter = 0;
-						break;
-					}else {
-						setTimeout(nextColor, 1000);
-					}
-			} else if (sequence[color] != mySeq[color] && chances == 1) {
-					mySeq = [];
-					chances = 0;
-					messageCenter.innerHTML = "You missed one! Lets try one more time. Here comes the needed sequence.";
-					setTimeout(seqLights, 5000);				
-					break;
-			} else if (sequence[color] != mySeq[color]) {
-					messageCenter.innerHTML = "Oh no! Your sequence did not match! Click a color to play again.";
-					console.log("it does not match!");
+	for (color in sequence) {
+		if (sequence[color] == mySeq[color] && color == lastColor) {
+				console.log("sequence's are a match!");
+				mySeq = [];
+				counter++;
+				document.getElementById("counter").innerHTML = counter;
+				console.log(counter);
+				if (counter >= 20) {
+					messageCenter.innerHTML = "Congratulations! You Beat Me! Click a color to play again.";
 					mySeq = [];
 					sequence = [];
 					counter = 0;
 					break;
-			} 
-		} 		
+				}else {
+					setTimeout(nextColor, 1000);
+				}
+		} else if (sequence[color] != mySeq[color] && chances == 1) {
+				mySeq = [];
+				chances = 0;
+				messageCenter.innerHTML = "You missed one! Lets try one more time. Here comes the needed sequence.";
+				setTimeout(seqLights, 5000);				
+				break;
+		} else if (sequence[color] != mySeq[color]) {
+				messageCenter.innerHTML = "Oh no! Your sequence did not match! Click a color to play again.";
+				console.log("it does not match!");
+				mySeq = [];
+				sequence = [];
+				counter = 0;
+				break;
+		} 
+	} 		
 }
 
-function strict() {
-		var strict = document.getElementById("strict");
-		var strictOption = strict.options[strict.selectedIndex].value;
-		console.log(strictOption);
+function strictCheck() {
+		strict = document.getElementById("strict");
+		strictOption = strict.options[strict.selectedIndex].value;
+		if (strictOption == "on") {
+				chances = 0;
+		}
+		console.log("check for strict");
 }
 
+function reset() {
+	messageCenter.innerHTML = "Click a color to start a new game.";
+	mySeq = [];
+	sequence = [];
+	counter = 0;
+	chances = 1;
+}
 
 // event listeners
 document.getElementById("blue").addEventListener("click", function() {
